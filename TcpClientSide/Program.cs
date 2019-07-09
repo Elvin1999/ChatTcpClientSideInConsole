@@ -29,8 +29,19 @@ namespace TcpClientSide
                 TcpClient client = new TcpClient();
 
                 Console.WriteLine("Starting to connect server");
+                while (!client.Connected)
+                {
+                    try
+                    {
 
-                client.Connect(endPoint);
+                        client.Connect(endPoint);
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+                }
+
                 while (true)
                 {
                     // Translate the passed message into ASCII and store it as a Byte array.
@@ -66,11 +77,11 @@ namespace TcpClientSide
             }
             catch (ArgumentNullException e)
             {
-                Console.WriteLine("ArgumentNullException: {0}", e);
+                //Console.WriteLine("ArgumentNullException: {0}", e);
             }
             catch (SocketException e)
             {
-                Console.WriteLine("SocketException: {0}", e);
+                //Console.WriteLine("SocketException: {0}", e);
             }
         }
         static void Main(string[] args)
